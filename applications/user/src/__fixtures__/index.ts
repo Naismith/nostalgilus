@@ -1,1 +1,1 @@
-export * from "./forumResponse";
+export { response as apiFixtures } from "./api";

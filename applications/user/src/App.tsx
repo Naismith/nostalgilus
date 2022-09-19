@@ -3,7 +3,7 @@ import { PATHS } from "src/constants";
 
 import HomePage from "src/pages/Home";
 import Thread from "src/pages/Thread";
-import Forum from "src/pages/Forum";
+import Forum from "src/pages/Forum/page";
 
 const App = () => {
   return (

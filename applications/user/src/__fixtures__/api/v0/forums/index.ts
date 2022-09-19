@@ -14,7 +14,7 @@ const lastPost = {
   },
 };
 
-export const forumResponse = {
+export const response = {
   forums: [
     {
       id: "5e7a4d1e-008d-4bfc-bb34-afd6bdcc7877",
