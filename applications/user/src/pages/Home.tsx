@@ -1,19 +1,32 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useId, useState } from "react";
 import { Link } from "react-router-dom";
 import { PATHS } from "src/constants";
+import { Accordion, AccordionSummary, AccordionDetails } from "@mui/material";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
-const Forum = ({ forum }: { forum: any }) => (
-  <div>
-    <p>{forum.name}</p>
-    <ul>
-      {forum.children.map((childForum: any) => (
-        <li key={childForum.id}>
-          <Link to={PATHS.FORUM(childForum.id)}>{childForum.name}</Link>
-        </li>
-      ))}
-    </ul>
-  </div>
-);
+const Forum = ({ forum }: { forum: any }) => {
+  const id = useId();
+  return (
+    <Accordion defaultExpanded disableGutters>
+      <AccordionSummary
+        expandIcon={<ExpandMoreIcon />}
+        aria-controls="panel1a-content"
+        id={id}
+      >
+        <p>{forum.name}</p>
+      </AccordionSummary>
+      <AccordionDetails>
+        <ul>
+          {forum.children.map((childForum: any) => (
+            <li key={childForum.id}>
+              <Link to={PATHS.FORUM(childForum.id)}>{childForum.name}</Link>
+            </li>
+          ))}
+        </ul>
+      </AccordionDetails>
+    </Accordion>
+  );
+};
 
 const HomePage = () => {
   const [forums, setForums] = useState<any[]>([]);
