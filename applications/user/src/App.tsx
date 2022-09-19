@@ -1,35 +1,19 @@
-import React, { useEffect, useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { PATHS } from "src/constants";
 
-const Forum = ({ forum }: { forum: any }) => (
-  <div>
-    <p>{forum.name}</p>
-    <ul>
-      {forum.children.map((childForum: any) => (
-        <li key={childForum.id}>{childForum.name}</li>
-      ))}
-    </ul>
-  </div>
-);
+import HomePage from "src/pages/Home";
+import Thread from "src/pages/Thread";
+import Forum from "src/pages/Forum";
 
 const App = () => {
-  const [forums, setForums] = useState<any[]>([]);
-
-  useEffect(() => {
-    const main = async () => {
-      const response = await fetch("/api/v0/forums/");
-      const data = await response.json();
-      setForums(data.forums);
-    };
-
-    main();
-  }, []);
-
   return (
-    <div>
-      {forums.map((forum) => (
-        <Forum key={forum.id} forum={forum} />
-      ))}
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path={PATHS.HOME} element={<HomePage />} />
+        <Route path={PATHS.THREAD(":id")} element={<Thread />} />
+        <Route path={PATHS.FORUM(":id")} element={<Forum />} />
+      </Routes>
+    </BrowserRouter>
   );
 };
 
